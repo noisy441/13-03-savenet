@@ -49,6 +49,36 @@
 
 ### Решение 1
 
+Выполним атаку из ОС Kali Linux c помощью nmap на целевую мшину с ОС Ubuntu и установленными в ней **Suricata** и **Fail2Ban**
+
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/img1.png)
+
+Как видим ни один вариант сканирования не завершился успехом. Посмотрим, что находится в логах **Suricata** и **Fail2Ban**.
+
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/suricata1.png)
+
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/suricata2.png)
+
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/suricata3.png)
+
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/suricata4.png)
+
+и **Fail2Ban**.
+
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/fail2ban1.png)
+
+Установим ssh сервер и повторим сканирование
+
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/img1-1.png)
+
+Nmap обнаружил открытый порт, а  **Suricata** обнаружила сканирование.
+
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/suricata4-1.png)
+
+
+**Suricata** видит атаку и записывает в логи попытки сканирования портов. **Fail2Ban** в отражении этой атаки не задействован. 
+**Suricata** в данном примере не настроена на работу в IPS mode поэтому никаких действия не предпринимается. Мы просто наблюдаем за атакой. 
+
 ------
 
 ### Задание 2
@@ -77,3 +107,17 @@
 *В качестве ответа пришлите события, которые попали в логи Suricata и Fail2Ban, прокомментируйте результат.*
 
 ### Решение 2
+
+Проведем атаку на ssh нашей машины с ОС Ubuntu (10.0.2.15) используя **thc-hydra**
+
+![2](https://github.com/noisy441/13-03-savenet/blob/main/img/img2.png)
+
+Судя по логам **Fail2Ban** видит атаку и блокирует ее,  **Suricata** так же видит атаку, что отражено в логах.
+
+![2](https://github.com/noisy441/13-03-savenet/blob/main/img/suricata2-1.png)
+
+![2](https://github.com/noisy441/13-03-savenet/blob/main/img/fail2ban2-1.png)
+
+**Suricata** как и в первом примере обнаружила атаку, а **Fail2Ban** заблокирован ip адрес атакующей машины (10.0.2.5) после нескольких неудачных попыток автооризации. Эта связка отлично работает, и может защитить систему от bruteforce-атаки.
+
+
