@@ -69,7 +69,7 @@
 
 Установим ssh сервер и повторим сканирование
 
-![1](https://github.com/noisy441/13-03-savenet/blob/main/img/img1-1.png)
+![1](https://github.com/noisy441/13-03-savenet/blob/main/img/img1-2.png)
 
 Nmap обнаружил открытый порт, а  **Suricata** обнаружила сканирование.
 
